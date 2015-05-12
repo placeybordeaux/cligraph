@@ -110,6 +110,9 @@ func update_window() {
 	window_length := (ui.Body.Width - 7) * 2
 	//                  /             |  |
 	//    total width__/    borders__/    \_ two points per character
+	if offset > len(data) {
+		return
+	}
 	if window_length < len(data) {
 		lc.Data = data[offset : offset+window_length]
 	} else if offset < len(data) {
