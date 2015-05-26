@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"math/rand"
 	"os"
 	"strconv"
 	"strings"
@@ -30,8 +31,11 @@ func readStdIn() {
 			total_par.Text = e.Error() //TODO make this a bit more reasonable
 		}
 		data = append(data, f)
-		//total_par.Text = info(data)
+		if rand.Float64() < 0.0001 { //insanely lazy
+			total_par.Text = info(data)
+		}
 	}
+	total_par.Text = info(data)
 	lc.Data = data
 }
 
