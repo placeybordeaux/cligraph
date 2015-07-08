@@ -134,9 +134,19 @@ func info(d []float64) string {
 	}()
 	b := new(bytes.Buffer)
 	fmt.Fprintf(b, "%v total points\n", len(d))
-	fmt.Fprintf(b, "Min: %v\tAvg: %v\tMax: %v\n", stats.Min(d), stats.Mean(d), stats.Max(d))
-	//fmt.Fprintf(b, "25th %v\t50th %v\t75th %v\t90th\t%v\t99th %v\n", stats.Percentile(d, 25), stats.Percentile(d, 50), stats.Percentile(d, 75), stats.Percentile(d, 90), stats.Percentile(d, 99))
-	fmt.Fprintf(b, "Standard deviation\n", stats.StdDevS(d))
+	min, _ := stats.Min(d)
+	max, _ := stats.Max(d)
+	mean, _ := stats.Mean(d)
+	p25, _ := stats.Percentile(d, 25)
+	p50, _ := stats.Percentile(d, 50)
+	p75, _ := stats.Percentile(d, 75)
+	p90, _ := stats.Percentile(d, 90)
+	p99, _ := stats.Percentile(d, 99)
+	stdd, _ := stats.StdDevS(d)
+
+	fmt.Fprintf(b, "Min: %v\tAvg: %v\tMax: %v\n", min, mean, max)
+	fmt.Fprintf(b, "25th %v\t50th %v\t75th %v\t90th\t%v\t99th %v\n", p25, p50, p75, p90, p99)
+	fmt.Fprintf(b, "Standard deviation\n", stdd)
 	return b.String()
 }
 
